@@ -1,5 +1,12 @@
 buildscript {
+    ext {
+        springBootVersion = '2.1.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
     dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         //추가
         classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
     }
@@ -11,6 +18,14 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'spring-validation'
+    version = '0.0.1-SNAPSHOT'
+}
 
 group = 'com.songjang'
 version = '0.0.1-SNAPSHOT'
@@ -38,5 +53,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.5.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.5.0'
 }
 
