@@ -1,6 +1,6 @@
-package com.songjang.webservice.dto.posts;
+package com.songjang.webservice.posts.dto;
 
-import com.songjang.webservice.domain.posts.Posts;
+import com.songjang.webservice.posts.domain.Posts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.songjang.webservice.domain.posts;
+package com.songjang.webservice.posts.domain;
 
 import com.songjang.webservice.domain.BaseTimeEntity;
 import lombok.AccessLevel;

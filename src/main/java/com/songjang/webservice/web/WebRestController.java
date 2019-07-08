@@ -1,7 +1,7 @@
 package com.songjang.webservice.web;
 
-import com.songjang.webservice.domain.posts.PostsRepository;
-import com.songjang.webservice.dto.posts.PostsSaveRequestDto;
+import com.songjang.webservice.posts.dto.PostsSaveRequestDto;
+import com.songjang.webservice.posts.repository.PostsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
