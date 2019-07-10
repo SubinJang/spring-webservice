@@ -1,6 +1,5 @@
-package com.songjang.webservice.domain.posts;
+package com.songjang.webservice.posts.domain;
 
-import com.songjang.webservice.posts.domain.Posts;
 import com.songjang.webservice.posts.repository.PostsRepository;
 import org.junit.After;
 import org.junit.Test;
