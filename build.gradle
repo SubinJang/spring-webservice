@@ -1,14 +1,17 @@
 buildscript {
     ext {
         springBootVersion = '2.1.6.RELEASE'
+        querydslPluginVersion = '1.0.10' // 플러그인 버전
     }
     repositories {
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" } // 플러그인 저장소
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         //추가
         classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}") // querydsl 플러그인 의존성 등록
     }
 }
 
@@ -21,6 +24,9 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+
 
 //jar {
 //    baseName = 'spring-validation'
@@ -45,6 +51,10 @@ repositories {
 ext['hibernate.version'] = '5.2.11.Final' //추가
 
 dependencies {
+    compile("com.querydsl:querydsl-jpa") // querydsl
+    compile("com.querydsl:querydsl-apt") // querydsl
+
+    
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -68,5 +78,29 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 //    testCompile('org.springframework.security:spring-security-test')
 //    testCompile('io.rest-assured:rest-assured:3.0.3') // Rest API Test
+}
+
+def querydslSrcDir = 'src/main/generated'
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslSrcDir
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslSrcDir]
+        }
+    }
+}
+
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
 }
 
